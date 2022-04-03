@@ -13,6 +13,7 @@ export const runtimeConfig =
         UMAMI_WEBSITE_ID: window?.env?.UMAMI_WEBSITE_ID,
         SKIP_HEALTH_CHECK_LOGS: window?.env?.SKIP_HEALTH_CHECK_LOGS,
         THEME: window?.env?.THEME,
+        CUSTOM_THEME_COLOUR: window?.env?.CUSTOM_THEME_COLOUR,
         FAVICON_URL: window?.env?.FAVICON_URL,
         AVATAR_URL: window?.env?.AVATAR_URL,
         AVATAR_ALT: window?.env?.AVATAR_ALT,
@@ -118,6 +119,7 @@ export const runtimeConfig =
           ? process.env.SKIP_HEALTH_CHECK_LOGS
           : process.env.RAZZLE_SKIP_HEALTH_CHECK_LOGS,
         THEME: nodeIsProduction ? process.env.THEME : process.env.RAZZLE_THEME,
+        CUSTOM_THEME_COLOUR: nodeIsProduction ? process.env.CUSTOM_THEME_COLOUR : process.env.RAZZLE_THEME,
         FAVICON_URL: nodeIsProduction
           ? process.env.FAVICON_URL
           : process.env.RAZZLE_FAVICON_URL,

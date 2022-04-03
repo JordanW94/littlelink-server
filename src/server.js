@@ -30,7 +30,22 @@ const jsScriptTagsFromAssets = (assets, entrypoint, extra = '') => {
     : '';
 };
 
-const theme = runtimeConfig.THEME === 'Dark' ? 'dark.css' : 'light.css';
+// const theme = runtimeConfig.THEME.toLowerCase() === 'dark' ? 'dark.css' : 'light.css';
+
+var theme = '';
+
+switch (runtimeConfig.THEME.toLowerCase()) {
+  case 'dark':
+    theme = 'dark.css';
+    break;
+  case 'light':
+    theme = 'light.css';
+    break;
+  case 'custom':
+    theme = 'custom.css';
+    break;
+}
+
 
 const server = express();
 
@@ -192,6 +207,21 @@ server
             <!-- Matomo End -->`
             : ''
         }
+        ${
+          runtimeConfig.THEME.toLowerCase() == 'custom'
+            ? `
+            <style>
+            body {
+              background: linear-gradient(to right, ${runtimeConfig.CUSTOM_THEME_COLOUR }, ${runtimeConfig.CUSTOM_THEME_COLOUR }), url(css/common-bg.svg);
+              font-size: 18px;
+              line-height: 24px;
+              font-weight: 400;
+              font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+              color: #FFFFFF;
+            }
+            </style>`
+            : ''
+        }
 
     </head>
     <body>
@@ -215,5 +245,6 @@ server
 server.get('/healthcheck', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
+
 
 export default server;
